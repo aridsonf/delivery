@@ -7,13 +7,16 @@
 
 <div class="col-8 m-auto">
     @csrf
-<table class="table table-striped text-center">
+    
+    <h2 class="text-center">Produtos</h2>
+
+    <table class="table table-striped text-center">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Id</th>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Action</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Preço</th>
+      <th scope="col">Ação</th>
     </tr>
   </thead>
   <tbody>
@@ -50,7 +53,7 @@
     </a>
 </div> 
 
-<script src="{{url("assets/js/delete_product.js")}}"></script>
+<script src="{{url("assets/js/Products/delete_product.js")}}"></script>
 
 
 @endsection

@@ -31,7 +31,7 @@
 
 </div>
 
-<script src="{{url("assets/js/login.js")}}"></script>
+<script src="{{url("assets/js/Users/login.js")}}"></script>
 
 
 @endsection

@@ -6,11 +6,14 @@
 
 <main>
     <div class="d-grid gap-2 col-6 mx-auto">
-        <a class="btn btn-primary btn-lg" role="button" data-bs-toggle="button" href="{{url("/crud_products")}}">
-            Produtos
+        <a class="btn btn-primary btn-lg" role="button" data-bs-toggle="button" href="#">
+            Pedidos
         </a>
         <a class="btn btn-primary btn-lg" role="button" data-bs-toggle="button" href="{{url("/crud_products")}}">
             Produtos
+        </a>
+        <a class="btn btn-primary btn-lg" role="button" data-bs-toggle="button" href="{{route("user.list")}}">
+            Usuários
         </a>
     </div>
 </main>

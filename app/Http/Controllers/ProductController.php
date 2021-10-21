@@ -23,7 +23,7 @@ class ProductController extends Controller
     public function index()
     {
         $product = $this->objProducts->paginate(5);
-        return view('crud_products', compact('product'));
+        return view('Products.crud_products', compact('product'));
     }
 
     /**
@@ -33,7 +33,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('create-update_products');
+        return view('Products.create-update_products');
     }
 
     /**
@@ -66,7 +66,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = $this->objProducts->find($id);
-        return view('show_products', compact('product'));
+        return view('Products.show_products', compact('product'));
     }
 
     /**
@@ -78,7 +78,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->objProducts->find($id);
-        return view('create-update_products', compact('product'));
+        return view('Products.create-update_products', compact('product'));
     }
 
     /**

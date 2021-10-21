@@ -34,6 +34,6 @@
         </div>
 </div>
 
-<script src="{{url("assets/js/create-update_products.js")}}"></script>
+<script src="{{url("assets/js/Products/create-update_products.js")}}"></script>
 
 @endsection
