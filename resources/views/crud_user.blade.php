@@ -26,16 +26,18 @@
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
             <td>{{$user->birth_date}}</td>
-            <td> @if (Auth::user()->access_lvl == 1) Cliente @else Funcionário @endif </td>
+            <td> @if ($user->access_lvl == 1) Cliente @else Funcionário @endif </td>
             <td>
                 <a href="{{url("/edit_user/$user->id")}}">
                     <button class="btn btn-primary">Editar</button>
                 </a>
                 @if (Auth::id() == $user->id)
                 @else
-                <a href="#">
-                    <button class="btn btn-danger" name="deleteProduct" id="deleteProduct">Deletar</button>
-                </a>
+                <form id="formDeleteUser" name="formDeleteUser">
+                    @csrf
+                    <input type="hidden" id="user_id" value="{{$user->id}}">
+                    <input class="btn btn-danger" type="submit" name="deleteUser" id="deleteUser" value="Deletar">
+                </form>
                 @endif
             </td>
         </tr>   
@@ -54,5 +56,6 @@
     </a>
 </div> 
 
+<script src="{{url("assets/js/Users/delete_users.js")}}"></script>
 
 @endsection

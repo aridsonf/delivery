@@ -1,30 +1,42 @@
-(function (win, doc) {
-    "use strict";
-
-    //Delete
-    function confirmDel(event) {
+$(function () {
+    $('form[name="formDeleteProduct"]').submit(function (event) {
         event.preventDefault();
 
-        let token = doc.getElementsByName("_token")[0].value;
-        if (confirm("Deseja mesmo apagar?")) {
-            let ajax = new XMLHttpRequest();
-            ajax.open("DELETE", event.target.parentNode.href);
-            ajax.setRequestHeader("X-CSRF-TOKEN", token);
-            ajax.onreadystatechange = function () {
-                if (ajax.readyState == 4 && ajax.status == 200) {
-                    win.location.href = "crud_products";
-                }
-            };
-            ajax.send();
-        } else {
-            return false;
-        }
-    }
+        var dados = $(this).serialize();
 
-    if (doc.querySelector(".js-del")) {
-        let btn = doc.querySelectorAll(".js-del");
-        for (let i = 0; i < btn.length; i++) {
-            btn[i].addEventListener("click", confirmDel, false);
-        }
-    }
-})(window, document);
+        var product_id = $(this).find("input#product_id").val();
+
+        Swal.fire({
+            title: "Tem certeza que deseja deletar o usuário?",
+            showDenyButton: true,
+            showLoaderOnConfirm: true,
+            confirmButtonText: "Deletar",
+            denyButtonText: `Cancelar`,
+            preConfirm: function () {
+                return new Promise(function (response) {
+                    $.ajax({
+                        url: "/crud_products/" + product_id,
+                        type: "delete",
+                        data: dados,
+                        dataType: "json",
+                    })
+                        .done(function (response) {
+                            Swal.fire(
+                                "Deletado!",
+                                "Produto deletado com sucesso",
+                                "success"
+                            );
+                            window.location.href = "/crud_products";
+                        })
+                        .fail(function () {
+                            Swal.fire(
+                                "Não deletado!",
+                                "Ação cancelada pelo usuário",
+                                "error"
+                            );
+                        });
+                });
+            },
+        });
+    });
+});

@@ -32,9 +32,11 @@
                 <a href="{{url("crud_products/$products->id/edit")}}">
                     <button class="btn btn-primary">Editar</button>
                 </a>
-                <a href="{{url("crud_products/$products->id")}}" class="js-del">
-                    <button class="btn btn-danger" name="deleteProduct" id="deleteProduct">Deletar</button>
-                </a>
+                <form id="formDeleteProduct" name="formDeleteProduct">
+                    @csrf
+                    <input type="hidden" id="product_id" value="{{$products->id}}">
+                    <input class="btn btn-danger" type="submit" name="deleteProduct" id="deleteProduct" value="Deletar">
+                </form>
             </td>
         </tr>   
 

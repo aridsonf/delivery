@@ -35,6 +35,5 @@ Route::get('/list_users', [ClientController::class, 'listUsers'])->name('user.li
 Route::get('/create_users/create', [ClientController::class, 'create'])->name('user.create');
 Route::post('/create_users', [ClientController::class, 'store'])->name('user.store');
 Route::get('/edit_user/{id}', [ClientController::class, 'edit']);
-
-
-
+Route::put('/update_users/{id}', [ClientController::class, 'update']);
+Route::delete('/delete_user/{id}', [ClientController::class, 'destroy']);
