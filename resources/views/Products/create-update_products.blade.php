@@ -4,7 +4,7 @@
 
 @include('template.header')
 
-<h2 class="text-center">@if(isset($product)) Editar @else Cadastrar @endif</h2> <hr>
+<h2 class="text-center">@if(isset($product)) Editar Produto @else Cadastrar Produto @endif</h2>
 
 <div class="col-8 m-auto">
         

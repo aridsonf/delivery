@@ -17,7 +17,7 @@ class CreateModelRequestsDataTable extends Migration
             $table->id();
             $table->biginteger('delivery_id')->unsigned();
             $table->foreign('delivery_id')->references('id')->on('delivery_requests')->onDelete('cascade')->onUpdate('cascade');
-            $table->biginteger('product_id')->unsigned();
+            $table->biginteger('product_id')->nullable()->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('product_quant');
             $table->timestamps();

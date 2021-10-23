@@ -11,4 +11,9 @@ class ModelProducts extends Model
 
     protected $table = 'products';
     protected $fillable = ['name', 'description', 'value'];
+
+    public function relRequestData()
+    {
+        return $this->hasMany('App\Models\ModelRequestsData', 'product_id');
+    }
 }

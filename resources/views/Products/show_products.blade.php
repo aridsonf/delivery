@@ -4,7 +4,7 @@
 
 @include('template.header')
 
-<h2 class="text-center">Dados</h1>
+<h2 class="text-center">Dados do produto </h2>
 
 <div class="col-8 m-auto">
     Id: {{$product->id}}<br>

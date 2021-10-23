@@ -24,7 +24,7 @@
         <tr>
             <th scope="row">{{$products->id}}</th>
             <td>{{$products->name}}</td>
-            <td>{{$products->value}}</td>
+            <td>R${{$products->value}}</td>
             <td>
                 <a href="{{url("crud_products/$products->id")}}">
                     <button class="btn btn-dark">Visualizar</button>

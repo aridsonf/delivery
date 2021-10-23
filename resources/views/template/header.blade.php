@@ -13,7 +13,7 @@
 
         <ul class="nav nav-pills">
           <li class="nav-item"><a href="{{route('dashboard')}}" class="nav-link" aria-current="page">Início</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Pedidos</a></li>
+          <li class="nav-item"><a href="{{route('request.list')}}" class="nav-link">Pedidos</a></li>
           <li class="nav-item"><a href="{{route('user.show')}}" class="nav-link">Dados</a></li>
           <li class="nav-item"><a href="{{route('auth.logout')}}" class="nav-link">Logout</a></li>
         </ul>
@@ -22,7 +22,7 @@
 
         <ul class="nav nav-pills">
           <li class="nav-item"><a href="{{route('dashboard')}}" class="nav-link" aria-current="page">Início</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Pedidos</a></li>
+          <li class="nav-item"><a href="{{route('request.list')}}" class="nav-link">Pedidos</a></li>
           <li class="nav-item"><a href="{{url('/crud_products')}}" class="nav-link">Produtos</a></li>
           <li class="nav-item"><a href="{{route("user.list")}}" class="nav-link">Usuários</a></li>
           <li class="nav-item"><a href="{{route('user.show')}}" class="nav-link">Dados</a></li>

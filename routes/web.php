@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     ProductController,
     LoginController,
-    ClientController
+    ClientController,
+    DeliveryController
 };
 
 
@@ -37,3 +38,11 @@ Route::post('/create_users', [ClientController::class, 'store'])->name('user.sto
 Route::get('/edit_user/{id}', [ClientController::class, 'edit']);
 Route::put('/update_users/{id}', [ClientController::class, 'update']);
 Route::delete('/delete_user/{id}', [ClientController::class, 'destroy']);
+
+//Rotas delivery request
+Route::get('/list_request', [DeliveryController::class, 'index'])->name('request.list');
+Route::get('/show_request/{id}', [DeliveryController::class, 'show']);
+Route::get('/create_request/create', [DeliveryController::class, 'createDelivery'])->name('request.create');
+Route::post('/create_request', [DeliveryController::class, 'store'])->name('request.store');
+Route::get('/shopping_request', [DeliveryController::class, 'shopping'])->name('request.shopping');
+Route::post('/shopping_request', [DeliveryController::class, 'storeRequestData'])->name('request.product.store');

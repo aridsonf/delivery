@@ -4,7 +4,7 @@
 
 @include('template.header')
 
-<h2 class="text-center mb-3">@if(isset($user)) Editar @else Cadastrar @endif</h2> 
+<h2 class="text-center mb-3">@if(isset($user)) Editar Usuário @else Cadastrar Usuário @endif</h2> 
 
 <div class="col-8 m-auto">
         
