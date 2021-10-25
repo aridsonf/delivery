@@ -26,17 +26,25 @@
             <td>{{$products->name}}</td>
             <td>R${{$products->value}}</td>
             <td>
-                <a href="{{url("crud_products/$products->id")}}">
-                    <button class="btn btn-dark">Visualizar</button>
-                </a>
-                <a href="{{url("crud_products/$products->id/edit")}}">
-                    <button class="btn btn-primary">Editar</button>
-                </a>
-                <form id="formDeleteProduct" name="formDeleteProduct">
-                    @csrf
-                    <input type="hidden" id="product_id" value="{{$products->id}}">
-                    <input class="btn btn-danger" type="submit" name="deleteProduct" id="deleteProduct" value="Deletar">
-                </form>
+                <div class="row">
+                    <div class="col">
+                        <a href="{{url("crud_products/$products->id")}}">
+                            <button class="btn btn-dark">Visualizar</button>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="{{url("crud_products/$products->id/edit")}}">
+                            <button class="btn btn-primary">Editar</button>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <form id="formDeleteProduct" name="formDeleteProduct">
+                            @csrf
+                            <input type="hidden" id="product_id" value="{{$products->id}}">
+                            <input class="btn btn-danger" type="submit" name="deleteProduct" id="deleteProduct" value="Deletar">
+                        </form>
+                    </div>
+                </div>
             </td>
         </tr>   
 

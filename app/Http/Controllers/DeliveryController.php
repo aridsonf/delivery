@@ -38,13 +38,33 @@ class DeliveryController extends Controller
             $deliverys = $this->objDelivery->paginate(5);
         }
 
-        return view('Delivery.crud_delivery', compact('deliverys'));
+        $cart = $this->objDelivery->where('status', 0)->where('user_id', Auth::id())->first();
+        if ($cart) {
+            return view('Delivery.crud_delivery', compact('deliverys', 'cart'));
+        } else {
+            return view('Delivery.crud_delivery', compact('deliverys'));
+        }
     }
 
     public function shopping()
     {
+        $cart = $this->objDelivery->where('status', 0)->where('user_id', Auth::id())->first();
+        if ($cart) {
+        } else {
+            ModelDeliveryRequests::create([
+                'status' => 0,
+                'user_id' => Auth::id(),
+                'delivery_date' => '0000-00-00'
+            ]);
+        }
         $product = $this->objProduct->paginate(5);
         return view('Delivery.shopping_delivery', compact('product'));
+    }
+
+    public function editShopping()
+    {
+        $delivery = $this->objDelivery->where('status', 0)->where('user_id', Auth::id())->first();
+        return view('Delivery.shopping_delivery', compact('delivery'));
     }
     /**
      * Show the form for creating a new resource.
@@ -57,11 +77,6 @@ class DeliveryController extends Controller
         return view('Delivery.create-update_delivery', compact('products'));
     }
 
-    public function createDelivery()
-    {
-        $products = $this->objProduct->all();
-        return view('Delivery.cart_delivery', compact('products'));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -69,16 +84,24 @@ class DeliveryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeDelivery()
     {
-        //
+        $cart = $this->objDelivery->where('status', 0)->where('user_id', Auth::id())->first();
+
+        $cart->update([
+            'status' => 1,
+            'delivery_date' => date('Y-m-d H:i:s')
+        ]);
+
+        return
+            ['stts' => 1, 'msg' => 'Atualização realizada com sucesso!'];
     }
 
     public function storeRequestData(Request $request)
     {
-
+        $cart = $this->objDelivery->where('status', 0)->where('user_id', Auth::id())->first();
         ModelRequestsData::create([
-            'delivery_id' => 1,
+            'delivery_id' => $cart->id,
             'product_id' => (int) $request->product_id,
             'product_quant' => $request->product_quant
         ]);
@@ -92,35 +115,32 @@ class DeliveryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showDeliverys($id)
     {
+
         $delivery = $this->objDelivery->find($id);
         $requests = $this->objRequestData->all();
 
         return view('Delivery.show_delivery', compact('delivery', 'requests'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function showUserDelivery()
     {
-        //
+        $delivery = $this->objDelivery->where('status', 0)->where('user_id', Auth::id())->first();
+        $requests = $this->objRequestData->all();
+
+        return view('Delivery.show_delivery', compact('delivery', 'requests'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function updateRequestData(Request $request, $id)
     {
-        //
+        $requestdata = $this->objRequestData->find($id);
+        $requestdata->update([
+            'product_quant' => $request->product_quant
+        ]);
+
+        return ['stts' => 1, 'msg' => 'Produto atualizado!'];
     }
 
     /**
@@ -129,8 +149,13 @@ class DeliveryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyRequestData($id)
     {
-        //
+        try {
+            $this->objRequestData->destroy($id);
+            return ['stts' => 1, 'msg' => 'Usuário deletado com sucesso!'];
+        } catch (\Throwable $th) {
+            return ['stts' => 0, 'msg' => "Erro: " . $th->getMessage()];
+        }
     }
 }

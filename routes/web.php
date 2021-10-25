@@ -41,8 +41,11 @@ Route::delete('/delete_user/{id}', [ClientController::class, 'destroy']);
 
 //Rotas delivery request
 Route::get('/list_request', [DeliveryController::class, 'index'])->name('request.list');
-Route::get('/show_request/{id}', [DeliveryController::class, 'show']);
-Route::get('/create_request/create', [DeliveryController::class, 'createDelivery'])->name('request.create');
-Route::post('/create_request', [DeliveryController::class, 'store'])->name('request.store');
+Route::get('/show_request/{id}', [DeliveryController::class, 'showDeliverys']);
+Route::get('/show_request', [DeliveryController::class, 'showUserDelivery'])->name('request.show');
 Route::get('/shopping_request', [DeliveryController::class, 'shopping'])->name('request.shopping');
 Route::post('/shopping_request', [DeliveryController::class, 'storeRequestData'])->name('request.product.store');
+Route::get('/edit_request', [DeliveryController::class, 'editShopping'])->name('request.shopping.edit');
+Route::put('/update_request/{id}', [DeliveryController::class, 'updateRequestData']);
+Route::delete('/delete_request/{id}', [DeliveryController::class, 'destroyRequestData']);
+Route::put('/create_delivery', [DeliveryController::class, 'storeDelivery'])->name('delivery.create');

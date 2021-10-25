@@ -42,7 +42,7 @@
                 <form id="formDeleteDelivery" name="formDeleteDelivery">
                     @csrf
                     <input type="hidden" id="product_id" value="{{$delivery->id}}">
-                    <input class="btn btn-danger" type="submit" name="deleteProduct" id="deleteProduct" value="Deletar">
+                    <input class="btn btn-danger" type="submit" name="deleteProduct" id="deleteProduct" value="Cancelar pedido">
                 </form>
             </td>
         </tr>   
@@ -58,7 +58,7 @@
 @if (Auth::user()->access_lvl == 1)
     <div class="text-center mt-3 mb-4">
         <a href="{{route("request.shopping")}}">
-            <button class="btn btn-success">Realizar pedido</button>
+            <button class="btn btn-success">@if(isset($cart)) Ver carrinho @else Realizar pedido @endif</button>
         </a>
     </div>  
 @endif

@@ -29,14 +29,36 @@
         Nome: {{$product->name}} | Quantidade: {{$item->product_quant}}<br>
     @endforeach
     
-    <div class="mt-3 mb-4">
-        <a href="{{route("request.list")}}" >
-            <button class="btn btn-dark">Voltar</button>
-        </a>
+      
+    <div class="mt-3 mb-4 row">
+        <div class='col-sm'>
+            <a href="{{route("request.shopping")}}" >
+                <button class="btn btn-dark">Adicionar produtos</button>
+            </a>
+        </div>
+        {{-- <a href="{{route("request.shopping.update")}}" > --}}
+        <div class='col-sm'>
+            <a href="{{route("request.shopping.edit")}}">
+                <button class="btn btn-primary">Atualizar pedido</button>
+            </a>
+        </div>
+        @if ($delivery->status == 0)
+            <div class='col-sm'>
+                 <form id="formCreateDelivery" name="formCreateDelivery">
+                    @csrf  
+                    <input class="btn btn-success" type="submit" name="createDelivery" id="createDelivery" value="Confirmar pedido">
+                </form>  
+            </div>
+        @endif
+        
     </div>
+
+    <div class="text-centrer mt-4 mb-4 p-2 alert alert-success d-none messageBoxSuccess" role="alert"></div>
+            
+    <div class="text-centrer mt-4 mb-4 p-2 alert alert-danger d-none messageBoxError" role="alert"></div>
 </div>
 
 
-
+<script src="{{url("assets/js/Delivery/create_delivery.js")}}"></script>
 
 @endsection()

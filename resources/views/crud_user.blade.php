@@ -14,7 +14,6 @@
       <th scope="col">Id</th>
       <th scope="col">Nome</th>
       <th scope="col">Email</th>
-      <th scope="col">Data de nascimento</th>
       <th scope="col">Tipo de usuário</th>
       <th scope="col">Ação</th>
     </tr>
@@ -25,20 +24,25 @@
             <th scope="row">{{$user->id}}</th>
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
-            <td>{{$user->birth_date}}</td>
             <td> @if ($user->access_lvl == 1) Cliente @else Funcionário @endif </td>
             <td>
-                <a href="{{url("/edit_user/$user->id")}}">
-                    <button class="btn btn-primary">Editar</button>
-                </a>
-                @if (Auth::id() == $user->id)
-                @else
-                <form id="formDeleteUser" name="formDeleteUser">
-                    @csrf
-                    <input type="hidden" id="user_id" value="{{$user->id}}">
-                    <input class="btn btn-danger" type="submit" name="deleteUser" id="deleteUser" value="Deletar">
-                </form>
-                @endif
+                <div class="row">
+                    <div class="col">
+                        <a href="{{url("/edit_user/$user->id")}}">
+                            <button class="btn btn-primary">Editar</button>
+                        </a>
+                    </div>
+                    <div class="col">
+                        @if (Auth::id() == $user->id)
+                        @else
+                        <form id="formDeleteUser" name="formDeleteUser">
+                            @csrf
+                            <input type="hidden" id="user_id" value="{{$user->id}}">
+                            <input class="btn btn-danger" type="submit" name="deleteUser" id="deleteUser" value="Deletar">
+                        </form>
+                        @endif
+                    </div>
+                </div>
             </td>
         </tr>   
     @endforeach
