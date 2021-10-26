@@ -10,7 +10,7 @@ class ModelProducts extends Model
     use HasFactory;
 
     protected $table = 'products';
-    protected $fillable = ['name', 'description', 'value'];
+    protected $fillable = ['name', 'description', 'value', 'stock'];
 
     public function relRequestData()
     {

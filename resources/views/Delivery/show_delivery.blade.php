@@ -69,7 +69,7 @@
                     </form>
                 </div>
             @endif
-            @if (Auth::user()->access_lvl == 2 && $delivery->status <= 2)
+            @if (Auth::user()->access_lvl == 2 && $delivery->status == 2)
                 <div class='col-sm'>
                     <form name="attDeliveryRequest" id="attDeliveryRequest">
                         @csrf

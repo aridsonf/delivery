@@ -144,10 +144,15 @@ class DeliveryController extends Controller
         try {
             $requestdata = $this->objRequestData->find($id);
             $product = $requestdata->relProduct;
+            if ($requestdata->product_quant <= $product->stock) {
+                $max = $product->stock;
+            } else {
+                $max = $requestdata->product_quant;
+            }
 
             $requestdataval = Validator::make(
                 $request->all(),
-                ['product_quant_delivered' => ['required', 'numeric', 'min:0', 'max:' . $requestdata->product_quant]]
+                ['product_quant_delivered' => ['required', 'numeric', 'min:0', 'max:' . $max]]
             );
 
             if ($requestdataval->fails()) {
@@ -168,11 +173,17 @@ class DeliveryController extends Controller
     {
         try {
             $cart = $this->objDelivery->find($id);
-
+            $itens = $cart->relRequestData;
             if ($cart->status == 1) {
                 $cart->update([
                     'status' => 2,
                 ]);
+                foreach ($itens as $item) {
+                    $product = $item->relProduct;
+                    $product->update([
+                        'stock' => ($product->stock - $item->product_quant_delivered)
+                    ]);
+                }
 
                 return ['stts' => 1, 'msg' => 'Situação atualizada com sucesso!'];
             } else {

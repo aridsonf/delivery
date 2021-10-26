@@ -18,6 +18,7 @@ class CreateModelProductsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->double('value', 10, 2);
+            $table->integer('stock');
             $table->timestamps();
         });
     }

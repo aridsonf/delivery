@@ -32,19 +32,20 @@ class ProductController extends Controller
         $rules = [
             'name' => ['required', 'string', 'max:191'],
             'description' => ['required', 'string', 'max:191'],
-            'value' => ['required', 'numeric', 'min:0']
+            'value' => ['required', 'numeric', 'min:0'],
+            'stock' => ['required', 'numeric', 'min:0']
         ];
         $messages = [
             'required' => 'O campo :attribute é obrigatório!',
             'max:191' => 'O campo :attribute tem que conter no máximo 191 caracteres!',
             'numeric' => 'O campo :attribute tem que ser um número!',
-            'value.min:0' => 'O valor tem que ser maior do que 0!',
-            'double' => 'E-mail em uso, utilize outro email!',
+            'min:0' => 'O valor do campo :attribute tem que ser maior do que 0!',
         ];
         $custom = [
             'name' => 'nome',
             'description' => 'descrição',
-            'value' => 'preço'
+            'value' => 'preço',
+            'stock' => 'estoque'
         ];
 
         return Validator::make($dados, $rules, $messages, $custom);
@@ -60,7 +61,8 @@ class ProductController extends Controller
                 $cad = $this->objProducts->create([
                     'name' => $request->name,
                     'description' => $request->description,
-                    'value' => $request->value
+                    'value' => $request->value,
+                    'stock' => $request->stock
                 ]);
                 if ($cad) {
                     return ['stts' => 1, 'msg' => 'Produto cadastrado com sucesso!'];;
@@ -93,7 +95,8 @@ class ProductController extends Controller
                 $this->objProducts->where(['id' => $id])->update([
                     'name' => $request->name,
                     'description' => $request->description,
-                    'value' => $request->value
+                    'value' => $request->value,
+                    'stock' => $request->stock
                 ]);
 
                 return ['stts' => 1, 'msg' => 'Produto atualizado com sucesso!'];

@@ -10,9 +10,11 @@ $(function () {
             dataType: "json",
             success: function (response) {
                 errors = "";
-                Object.keys(response.erros).forEach(function (key) {
-                    errors += response.erros[key] + "<br>";
-                });
+                if (response.erros) {
+                    Object.keys(response.erros).forEach(function (key) {
+                        errors += response.erros[key] + "<br>";
+                    });
+                }
                 if (response.stts == 1) {
                     $(".messageBoxError").addClass("d-none").html(errors);
                     $(".messageBoxSuccess")
@@ -39,9 +41,11 @@ $(function () {
             dataType: "json",
             success: function (response) {
                 errors = "";
-                Object.keys(response.erros).forEach(function (key) {
-                    errors += response.erros[key] + "<br>";
-                });
+                if (response.erros) {
+                    Object.keys(response.erros).forEach(function (key) {
+                        errors += response.erros[key] + "<br>";
+                    });
+                }
                 if (response.stts == 1) {
                     $(".messageBoxError").addClass("d-none").html(errors);
                     $(".messageBoxSuccess")

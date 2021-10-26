@@ -27,6 +27,7 @@
         <input class="form-control" type="text" name="name" id="name" placeholder="Nome do produto:" value="{{$product->name ?? ''}}" required><br>
         <input class="form-control" type="text" name="description" id="description" placeholder="Descrição:" value="{{$product->description ?? ''}}" required><br>
         <input class="form-control" type="number" step="0.01" name="value" id="value" placeholder="Preço:" value="{{$product->value ?? ''}}" required><br>
+        <input class="form-control" type="number" step="1" name="stock" id="stock" placeholder="Definir estoque:" value="{{$product->stock ?? '0'}}" required><br>
         <input class="btn btn-primary" type="submit" value="@if(isset($product)) Editar @else Cadastrar @endif">          
     </form>
     <div class="mt-3">

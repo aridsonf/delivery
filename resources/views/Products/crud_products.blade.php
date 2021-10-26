@@ -16,6 +16,7 @@
       <th scope="col">Id</th>
       <th scope="col">Nome</th>
       <th scope="col">Preço</th>
+      <th scope="col">Estoque</th>
       <th scope="col">Ação</th>
     </tr>
   </thead>
@@ -25,6 +26,7 @@
             <th scope="row">{{$products->id}}</th>
             <td>{{$products->name}}</td>
             <td>R${{$products->value}}</td>
+            <td>{{$products->stock}}</td>
             <td>
                 <div class="row">
                     <div class="col">
@@ -48,9 +50,7 @@
                 </div>
             </td>
         </tr>   
-
     @endforeach
-    
   </tbody>
 </table>
     <div class="d-flex justify-content-center">
@@ -65,6 +65,5 @@
 </div> 
 
 <script src="{{url("assets/js/Products/delete_product.js")}}"></script>
-
 
 @endsection

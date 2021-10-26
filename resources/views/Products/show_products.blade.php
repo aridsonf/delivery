@@ -10,7 +10,8 @@
     Id: {{$product->id}}<br>
     Nome: {{$product->name}}<br>
     Descrição: {{$product->description}}<br>
-    Preço: {{$product->value}}<br>   
+    Preço: {{$product->value}}<br>  
+    Quantidade em estoque: {{$product->stock}}<br> 
     
     <div class="mt-3 mb-4">
         <a href="{{url("crud_products/")}}" >
