@@ -9,8 +9,12 @@ $(function () {
             data: $(this).serialize(),
             dataType: "json",
             success: function (response) {
+                errors = "";
+                Object.keys(response.erros).forEach(function (key) {
+                    errors += response.erros[key] + "<br>";
+                });
                 if (response.stts == 1) {
-                    $(".messageBoxError").addClass("d-none").html(response.msg);
+                    $(".messageBoxError").addClass("d-none").html(errors);
                     $(".messageBoxSuccess")
                         .removeClass("d-none")
                         .html(response.msg);
@@ -19,9 +23,7 @@ $(function () {
                     $(".messageBoxSuccess")
                         .addClass("d-none")
                         .html(response.msg);
-                    $(".messageBoxError")
-                        .removeClass("d-none")
-                        .html(response.msg);
+                    $(".messageBoxError").removeClass("d-none").html(errors);
                 }
             },
         });
@@ -36,20 +38,21 @@ $(function () {
             data: $(this).serialize(),
             dataType: "json",
             success: function (response) {
+                errors = "";
+                Object.keys(response.erros).forEach(function (key) {
+                    errors += response.erros[key] + "<br>";
+                });
                 if (response.stts == 1) {
-                    $(".messageBoxError").addClass("d-none").html(response.msg);
+                    $(".messageBoxError").addClass("d-none").html(errors);
                     $(".messageBoxSuccess")
                         .removeClass("d-none")
                         .html(response.msg);
                     window.location.href = "/list_users";
                 } else {
-                    console.log(response.msg);
                     $(".messageBoxSuccess")
                         .addClass("d-none")
                         .html(response.msg);
-                    $(".messageBoxError")
-                        .removeClass("d-none")
-                        .html(response.msg);
+                    $(".messageBoxError").removeClass("d-none").html(errors);
                 }
             },
         });

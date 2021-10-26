@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\ModelProducts;
 use Illuminate\Support\Facades\Validator;
+use App\Models\ModelProducts;
 
 class ProductController extends Controller
 {
@@ -35,7 +35,7 @@ class ProductController extends Controller
             'value' => ['required', 'numeric', 'min:0']
         ];
         $messages = [
-            'required' => 'O campo :attribute é obtrigatório!',
+            'required' => 'O campo :attribute é obrigatório!',
             'max:191' => 'O campo :attribute tem que conter no máximo 191 caracteres!',
             'numeric' => 'O campo :attribute tem que ser um número!',
             'value.min:0' => 'O valor tem que ser maior do que 0!',

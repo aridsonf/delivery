@@ -44,7 +44,7 @@ class ClientController extends Controller
             'password' => ['required', 'min:4'],
         ];
         $messages = [
-            'required' => 'O campo :attribute é obtrigatório!',
+            'required' => 'O campo :attribute é obrigatório!',
             'max:191' => 'O campo :attribute tem que conter no máximo 191 caracteres!',
             'min:4' => 'O campo :attribute tem que conter no mínimo caracteres!',
             'email.unique' => 'E-mail em uso, utilize outro email!',

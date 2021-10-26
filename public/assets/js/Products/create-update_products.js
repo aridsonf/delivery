@@ -9,20 +9,21 @@ $(function () {
             data: $(this).serialize(),
             dataType: "json",
             success: function (response) {
+                errors = "";
+                Object.keys(response.erros).forEach(function (key) {
+                    errors += response.erros[key] + "<br>";
+                });
                 if (response.stts == 1) {
-                    $(".messageBoxError")
-                        .addClass("d-none")
-                        .html(response.erros);
+                    $(".messageBoxError").addClass("d-none").html(errors);
                     $(".messageBoxSuccess")
                         .removeClass("d-none")
-                        .html(response.erros);
+                        .html(response.msg);
+                    window.location.href = "/crud_products/";
                 } else {
                     $(".messageBoxSuccess")
                         .addClass("d-none")
-                        .html(response.erros);
-                    $(".messageBoxError")
-                        .removeClass("d-none")
-                        .html(response.erros);
+                        .html(response.msg);
+                    $(".messageBoxError").removeClass("d-none").html(errors);
                 }
             },
         });
@@ -37,21 +38,21 @@ $(function () {
             data: $(this).serialize(),
             dataType: "json",
             success: function (response) {
+                errors = "";
+                Object.keys(response.erros).forEach(function (key) {
+                    errors += response.erros[key] + "<br>";
+                });
                 if (response.stts == 1) {
-                    $(".messageBoxError")
-                        .addClass("d-none")
-                        .html(response.erros);
+                    $(".messageBoxError").addClass("d-none").html(errors);
                     $(".messageBoxSuccess")
                         .removeClass("d-none")
-                        .html(response.erros);
+                        .html(response.msg);
                     window.location.href = "/crud_products/";
                 } else {
                     $(".messageBoxSuccess")
                         .addClass("d-none")
-                        .html(response.erros);
-                    $(".messageBoxError")
-                        .removeClass("d-none")
-                        .html(response.erros[1]);
+                        .html(response.msg);
+                    $(".messageBoxError").removeClass("d-none").html(errors);
                 }
             },
         });
