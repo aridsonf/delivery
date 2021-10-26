@@ -9,7 +9,21 @@ $(function () {
             data: $(this).serialize(),
             dataType: "json",
             success: function (response) {
-                $(".messageBox").removeClass("d-none").html(response.message);
+                if (response.stts == 1) {
+                    $(".messageBoxError")
+                        .addClass("d-none")
+                        .html(response.erros);
+                    $(".messageBoxSuccess")
+                        .removeClass("d-none")
+                        .html(response.erros);
+                } else {
+                    $(".messageBoxSuccess")
+                        .addClass("d-none")
+                        .html(response.erros);
+                    $(".messageBoxError")
+                        .removeClass("d-none")
+                        .html(response.erros);
+                }
             },
         });
     });
@@ -23,9 +37,21 @@ $(function () {
             data: $(this).serialize(),
             dataType: "json",
             success: function (response) {
-                $(".messageBox").removeClass("d-none").html(response.message);
-                if (response.success === true) {
+                if (response.stts == 1) {
+                    $(".messageBoxError")
+                        .addClass("d-none")
+                        .html(response.erros);
+                    $(".messageBoxSuccess")
+                        .removeClass("d-none")
+                        .html(response.erros);
                     window.location.href = "/crud_products/";
+                } else {
+                    $(".messageBoxSuccess")
+                        .addClass("d-none")
+                        .html(response.erros);
+                    $(".messageBoxError")
+                        .removeClass("d-none")
+                        .html(response.erros[1]);
                 }
             },
         });

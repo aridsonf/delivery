@@ -8,6 +8,8 @@
 
 <div class="col-8 m-auto">
         
+    <div class="text-centrer mt-4 mb-4 p-2 alert alert-success d-none messageBoxSuccess" role="alert"></div>        
+    <div class="text-centrer mt-4 mb-4 p-2 alert alert-danger d-none messageBoxError" role="alert"></div>
     
 
     @if(isset($product))

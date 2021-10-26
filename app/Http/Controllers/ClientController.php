@@ -7,10 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rules;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Lang;
 use App\Models\User;
 
 class ClientController extends Controller
@@ -45,15 +41,23 @@ class ClientController extends Controller
             'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             'access_lvl' => ['required', 'int',  'max:2', 'min:1'],
             'birth_date' => ['required', 'date'],
-            'password' => ['required'],
+            'password' => ['required', 'min:4'],
         ];
         $messages = [
             'required' => 'O campo :attribute é obtrigatório!',
             'max:191' => 'O campo :attribute tem que conter no máximo 191 caracteres!',
+            'min:4' => 'O campo :attribute tem que conter no mínimo caracteres!',
             'email.unique' => 'E-mail em uso, utilize outro email!',
         ];
+        $custom = [
+            'name' => 'name',
+            'email' => 'e-mail',
+            'access_lvl' => 'nível de acesso',
+            'birth_date' => 'data de nascimento',
+            'password' => 'senha'
+        ];
 
-        return Validator::make($dados, $rules, $messages);
+        return Validator::make($dados, $rules, $messages, $custom);
     }
 
     public function create()
