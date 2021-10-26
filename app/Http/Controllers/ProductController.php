@@ -71,58 +71,38 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $product = $this->objProducts->find($id);
         return view('Products.show_products', compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $product = $this->objProducts->find($id);
         return view('Products.create-update_products', compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         try {
-            $this->objProducts->where(['id' => $id])->update([
-                'name' => $request->name,
-                'description' => $request->description,
-                'value' => $request->value
-            ]);
+            $val = ProductController::validador($request->all());
+            if ($val->fails()) {
+                return ['stts' => 0, 'msg' => 'Ocorreu um erro', 'erros' => $val->errors()];
+            } else {
+                $this->objProducts->where(['id' => $id])->update([
+                    'name' => $request->name,
+                    'description' => $request->description,
+                    'value' => $request->value
+                ]);
 
-            return ['stts' => 1, 'msg' => 'Produto atualizado com sucesso!'];
+                return ['stts' => 1, 'msg' => 'Produto atualizado com sucesso!'];
+            }
         } catch (\Throwable $th) {
             return ['stts' => 0, 'msg' => "Erro: " . $th->getMessage()];
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         try {
