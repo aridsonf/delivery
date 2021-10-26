@@ -69,6 +69,15 @@
                     </form>
                 </div>
             @endif
+            @if (Auth::user()->access_lvl == 2 && $delivery->status <= 2)
+                <div class='col-sm'>
+                    <form name="attDeliveryRequest" id="attDeliveryRequest">
+                        @csrf
+                        <input type="hidden" id="delivery_id" value="{{$delivery->id}}">
+                        <input type="submit" class="btn btn-success" value="Enviar pedido">
+                    </form>
+                </div>
+            @endif
             @if(((Auth::user()->access_lvl) == 2 && ($delivery->status <= 2)) || ((Auth::user()->access_lvl == 1) && ($delivery->status <= 1)))
                 <div class='col-sm'>
                     <form name="delDeliveryRequest" id="delDeliveryRequest">
