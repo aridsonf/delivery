@@ -10,8 +10,9 @@ class ProductController extends Controller
 {
     private $objProducts;
 
-    public function __construct(){
-        
+    public function __construct()
+    {
+
         $this->objProducts = new ModelProducts;
     }
 
@@ -45,11 +46,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $cad = $this->objProducts->create([
-            'name'=>$request->name,
-            'description'=>$request->description,
-            'value'=>$request->value
+            'name' => $request->name,
+            'description' => $request->description,
+            'value' => $request->value
         ]);
-        if($cad){
+        if ($cad) {
             $store['success'] = true;
             $store['message'] = 'Cadastro realizado com sucesso!';
             echo json_encode($store);
@@ -90,10 +91,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->objProducts->where(['id'=>$id])->update([
-            'name'=>$request->name,
-            'description'=>$request->description,
-            'value'=>$request->value
+        $this->objProducts->where(['id' => $id])->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'value' => $request->value
         ]);
         $update['success'] = true;
         $update['message'] = 'Atualização realizada com sucesso!';
@@ -111,7 +112,11 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $del = $this->objProducts->destroy($id);
-        return($del)?"sim":"não";
+        try {
+            $this->objProducts->destroy($id);
+            return ['stts' => 1, 'msg' => 'Produto deletado com sucesso!'];
+        } catch (\Throwable $th) {
+            return ['stts' => 0, 'msg' => "Erro: " . $th->getMessage()];
+        }
     }
 }

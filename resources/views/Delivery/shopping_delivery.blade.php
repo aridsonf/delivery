@@ -35,25 +35,42 @@
                 <tr>
                     <td scope="row">{{$products->name}}</td>
                     <td>R${{$products->value}}</td>
-                    <td>   
-                        <form id="formAttRequestData" name="formAttRequestData">
-                            @csrf
-                            <input type="hidden" id="product_id" name="product_id" value="{{$item->id}}">
-                            <div class="row">
-                                <div class="col">                        
-                                    <input class="form-control w-50 mx-auto" type="number" id="product_quant" name="product_quant" step="1" value="{{$item->product_quant}}">
+                    <td>
+                        @if (Auth::user()->access_lvl == 1)
+                            <form id="formAttRequestData" name="formAttRequestData">
+                                @csrf
+                                <input type="hidden" id="product_id" name="product_id" value="{{$item->id}}">
+                                <div class="row">
+                                    <div class="col">                        
+                                        <input class="form-control w-50 mx-auto" type="number" id="product_quant" name="product_quant" step="1" value="{{$item->product_quant}}">
+                                    </div>
+                                    <div class="col">                        
+                                        <input class="btn btn-success" type="submit" name="attProduct" id="attProduct" value="Atualizar produto">
+                                    </div>
                                 </div>
-                                <div class="col">                        
-                                    <input class="btn btn-success" type="submit" name="attProduct" id="attProduct" value="Atualizar produto">
+                            </form>
+                        @else
+                            <form id="formAttRequestDataDelivered" name="formAttRequestDataDelivered">
+                                @csrf
+                                <input type="hidden" id="product_id" name="product_id" value="{{$item->id}}">
+                                <div class="row">
+                                    <div class="col">                        
+                                        <input class="form-control w-50 mx-auto" type="number" id="product_quant_delivered" name="product_quant_delivered" step="1" value="{{$item->product_quant}}" max="{{$item->product_quant}}" min="0">
+                                    </div>
+                                    <div class="col">                        
+                                        <input class="btn btn-success" type="submit" name="attProduct" id="attProduct" value="Atender quantidade">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                        <form id="formDelRequestData" name="formDelRequestData">
-                            @csrf
-                            <input type="hidden" id="product_id" name="product_id" value="{{$item->id}}">
-                            <input type="hidden" id="product_name" name="product_name" value="{{$products->name}}">
-                            <input class="btn btn-danger" type="submit" name="delProduct" id="delproduct" value="Excluir produto">
-                        </form>    
+                            </form>
+                        @endif   
+                        @if (Auth::user()->access_lvl == 1)
+                            <form id="formDelRequestData" name="formDelRequestData">
+                                @csrf
+                                <input type="hidden" id="product_id" name="product_id" value="{{$item->id}}">
+                                <input type="hidden" id="product_name" name="product_name" value="{{$products->name}}">
+                                <input class="btn btn-danger" type="submit" name="delProduct" id="delproduct" value="Excluir produto">
+                            </form>
+                        @endif   
                     </td>
                 </tr>   
             @endforeach
@@ -90,12 +107,19 @@
         </div> 
     @endif
 </div>
-
-<div class="text-center mt-3 mb-4">
-    <a href="{{route("request.show")}}">
-        <button class="btn btn-info">Ver carrinho</button>
-    </a>
-</div>  
+@if (Auth::user()->access_lvl == 1)
+    <div class="text-center mt-3 mb-4">
+        <a href="{{route("request.show")}}">
+            <button class="btn btn-info">Ver carrinho</button>
+        </a>
+    </div>  
+@else
+    <div class="text-center mt-3 mb-4">
+        <a href="{{url("/show_request/$delivery->id")}}">
+            <button class="btn btn-info">Voltar</button>
+        </a>
+    </div>  
+@endif
 
 <script src="{{url("assets/js/Delivery/request_product.js")}}"></script>
 

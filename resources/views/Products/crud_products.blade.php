@@ -41,6 +41,7 @@
                         <form id="formDeleteProduct" name="formDeleteProduct">
                             @csrf
                             <input type="hidden" id="product_id" value="{{$products->id}}">
+                            <input type="hidden" id="product_name" value="{{$products->name}}">
                             <input class="btn btn-danger" type="submit" name="deleteProduct" id="deleteProduct" value="Deletar">
                         </form>
                     </div>

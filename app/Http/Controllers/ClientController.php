@@ -22,14 +22,9 @@ class ClientController extends Controller
     {
         $this->objUsers = new User;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-
         if (Auth::user()->access_lvl == 1) {
             return view('dashboard_client');
         } else {
@@ -39,11 +34,9 @@ class ClientController extends Controller
 
     public function listUsers()
     {
-
         $users = $this->objUsers->paginate(5);
         return view('crud_user', compact('users'));
     }
-
 
     public function validador($dados)
     {
@@ -62,26 +55,15 @@ class ClientController extends Controller
 
         return Validator::make($dados, $rules, $messages);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('create-update_user');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         try {
-
             $validator = ClientController::validador($request->all());
             if ($validator->fails()) {
                 return ['stts' => 0, 'msg' => 'Ocorreu um erro', 'erros' => $validator->errors()];
@@ -115,25 +97,12 @@ class ClientController extends Controller
         return view('show_user');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $user = User::find($id);
         return view('create-update_user', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         try {
@@ -150,6 +119,10 @@ class ClientController extends Controller
                 $update_user += [
                     'password' => Hash::make($request->password),
                 ];
+            } else {
+                $update_user += [
+                    'password' => $user->password,
+                ];
             }
 
             $validator = ClientController::validador($update_user);
@@ -165,12 +138,6 @@ class ClientController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         try {

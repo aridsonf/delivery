@@ -9,7 +9,6 @@ $(function () {
             dataType: "json",
             success: function (response) {
                 if (response.stts == 1) {
-                    console.log(response.msg);
                     $(".messageBoxError").addClass("d-none").html(response.msg);
                     $(".messageBoxSuccess")
                         .removeClass("d-none")

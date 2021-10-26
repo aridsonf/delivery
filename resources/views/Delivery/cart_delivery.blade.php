@@ -9,9 +9,9 @@
 <div class="col-8 m-auto">
         
     @php   
-            $user    = $delivery->relUser;
-            $itens = $delivery->relRequestData;
-        @endphp
+        $user  = $delivery->relUser;
+        $itens = $delivery->relRequestData;
+    @endphp
 
     @if(isset($delivery))
         <form name="formEditProduct" id="formEditProduct">

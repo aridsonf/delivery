@@ -5,9 +5,13 @@ $(function () {
         var dados = $(this).serialize();
 
         var product_id = $(this).find("input#product_id").val();
+        var product_name = $(this).find("input#product_name").val();
 
         Swal.fire({
-            title: "Tem certeza que deseja deletar o usuário?",
+            title:
+                "Tem certeza que deseja deletar o produto: " +
+                product_name +
+                "?",
             showDenyButton: true,
             showLoaderOnConfirm: true,
             confirmButtonText: "Deletar",

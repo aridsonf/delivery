@@ -96,4 +96,33 @@ $(function () {
             },
         });
     });
+    //Atualizando para colocar a quantidade dos produtos atendida
+    $('form[name="formAttRequestDataDelivered"]').submit(function (event) {
+        event.preventDefault();
+
+        var dados = $(this).serialize();
+
+        var product_id = $(this).find("input#product_id").val();
+        $.ajax({
+            url: "/update_request_delivered/" + product_id,
+            type: "put",
+            data: dados,
+            dataType: "json",
+            success: function (response) {
+                if (response.stts == 1) {
+                    $(".messageBoxError").addClass("d-none").html(response.msg);
+                    $(".messageBoxSuccess")
+                        .removeClass("d-none")
+                        .html(response.msg);
+                } else {
+                    $(".messageBoxSuccess")
+                        .addClass("d-none")
+                        .html(response.msg);
+                    $(".messageBoxError")
+                        .removeClass("d-none")
+                        .html(response.msg);
+                }
+            },
+        });
+    });
 });
