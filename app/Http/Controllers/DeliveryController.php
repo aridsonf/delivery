@@ -12,6 +12,8 @@ use App\Models\{
     User
 };
 
+use \PDF;
+
 class DeliveryController extends Controller
 {
     private $objDelivery;
@@ -223,5 +225,15 @@ class DeliveryController extends Controller
         } catch (\Throwable $th) {
             return ['stts' => 0, 'msg' => "Erro: " . $th->getMessage()];
         }
+    }
+
+    public function createPDF($id)
+    {
+        $delivery = $this->objDelivery->find($id);
+        $requests = $this->objRequestData->all();
+
+        $pdf = PDF::loadView('Delivery.pdf_delivery', compact('delivery', 'requests'));
+
+        return $pdf->download('pdf.pdf');
     }
 }

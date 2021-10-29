@@ -11,7 +11,9 @@
             $user  = $delivery->find($delivery->id)->relUser;
             $itens = $delivery->find($delivery->id)->relRequestData;
     @endphp
-
+    <div class="d-flex justify-content-end mb-4">
+        <a class="btn btn-primary btn-sm" href="{{url("/create_delivery_pdf/$delivery->id")}}">Criar PDF da página</a>
+    </div>
     Id: {{$delivery->id}}<br>
     Status: @if ($delivery->status == 1)
                 Pedido aguardando confirmação

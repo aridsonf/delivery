@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     ProductController,
     LoginController,
-    ClientController,
+    UserController,
     DeliveryController
 };
 
@@ -30,14 +30,14 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 
 
 //Rotas user
-Route::get('/dashboard', [ClientController::class, 'index'])->name('dashboard');
-Route::get('/show_user', [ClientController::class, 'show'])->name('user.show');
-Route::get('/list_users', [ClientController::class, 'listUsers'])->name('user.list');
-Route::get('/create_users/create', [ClientController::class, 'create'])->name('user.create');
-Route::post('/create_users', [ClientController::class, 'store'])->name('user.store');
-Route::get('/edit_user/{id}', [ClientController::class, 'edit']);
-Route::put('/update_users/{id}', [ClientController::class, 'update']);
-Route::delete('/delete_user/{id}', [ClientController::class, 'destroy']);
+Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
+Route::get('/show_user', [UserController::class, 'show'])->name('user.show');
+Route::get('/list_users', [UserController::class, 'listUsers'])->name('user.list');
+Route::get('/create_users/create', [UserController::class, 'create'])->name('user.create');
+Route::post('/create_users', [UserController::class, 'store'])->name('user.store');
+Route::get('/edit_user/{id}', [UserController::class, 'edit']);
+Route::put('/update_users/{id}', [UserController::class, 'update']);
+Route::delete('/delete_user/{id}', [UserController::class, 'destroy']);
 
 //Rotas delivery request
 Route::get('/list_request', [DeliveryController::class, 'index'])->name('request.list');
@@ -52,3 +52,4 @@ Route::delete('/delete_request/{id}', [DeliveryController::class, 'destroyReques
 Route::put('/create_delivery', [DeliveryController::class, 'storeDelivery'])->name('delivery.create');
 Route::put('/update_delivery/{id}', [DeliveryController::class, 'updateDeliveryStatus']);
 Route::delete('/delete_delivery/{id}', [DeliveryController::class, 'destroyDelivery']);
+Route::get('/create_delivery_pdf/{id}', [DeliveryController::class, 'createPDF']);

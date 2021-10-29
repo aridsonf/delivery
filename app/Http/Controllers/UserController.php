@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 
-class ClientController extends Controller
+class UserController extends Controller
 {
 
     private $objUsers;
@@ -22,16 +22,16 @@ class ClientController extends Controller
     public function index()
     {
         if (Auth::user()->access_lvl == 1) {
-            return view('dashboard_client');
+            return view('User.dashboard_client');
         } else {
-            return view('dashboard_funcionario');
+            return view('User.dashboard_funcionario');
         }
     }
 
     public function listUsers()
     {
         $users = $this->objUsers->paginate(5);
-        return view('crud_user', compact('users'));
+        return view('User.crud_user', compact('users'));
     }
 
     public function validador($dados)
@@ -62,13 +62,13 @@ class ClientController extends Controller
 
     public function create()
     {
-        return view('create-update_user');
+        return view('User.create-update_user');
     }
 
     public function store(Request $request)
     {
         try {
-            $validator = ClientController::validador($request->all());
+            $validator = UserController::validador($request->all());
             if ($validator->fails()) {
                 return ['stts' => 0, 'msg' => 'Ocorreu um erro', 'erros' => $validator->errors()];
             } else {
@@ -90,21 +90,15 @@ class ClientController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show()
     {
-        return view('show_user');
+        return view('User.show_user');
     }
 
     public function edit($id)
     {
         $user = User::find($id);
-        return view('create-update_user', compact('user'));
+        return view('User.create-update_user', compact('user'));
     }
 
     public function update(Request $request, $id)
@@ -129,7 +123,7 @@ class ClientController extends Controller
                 ];
             }
 
-            $validator = ClientController::validador($update_user);
+            $validator = UserController::validador($update_user);
 
             if ($validator->fails()) {
                 return ['stts' => 0, 'msg' => 'Ocorreu um erro', 'erros' => $validator->errors()];
